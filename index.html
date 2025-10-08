@@ -62,21 +62,21 @@
       <div class="navbar-item has-dropdown is-hoverable">
         <p style="font-size:18px; display: inline; margin-right: -2px; margin-top: 12px;">🔥</p>
         <a class="navbar-link">
-          More Research
+          More Research for Long CoT Reasoning
         </a>
         <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://github.com/THUDM/LongBench">
-            <b>LongBench</b> 
+          <a class="navbar-item" href="https://longbench2.github.io/">
+            <b>LongBench v2</b> 
           </a>
-          <a class="navbar-item" href="https://github.com/THUDM/LongAlign">
-            <b>LongAlign</b> 
+          <a class="navbar-item" href="https://github.com/THU-KEG/AdaptThink">
+            <b>AdaptThink</b> 
           </a>
-          <a class="navbar-item" href="https://github.com/THUDM/LongWriter">
-            <b>LongWriter</b> 
+          <a class="navbar-item" href="https://arxiv.org/pdf/2509.25176v1">
+            <b>SIRI</b> 
           </a>
-          <a class="navbar-item" href="https://github.com/THUDM/LongCite">
+          <!-- <a class="navbar-item" href="https://github.com/THUDM/LongCite">
             <b>LongCite</b> 
-          </a>
+          </a> -->
         </div>
       </div>
     </div>
@@ -92,14 +92,14 @@
         <div class="column has-text-centered">
           <h1 class="title is-1 publication-title is-bold">
             <!-- <img src="static/images/logo.png" style="width:4.6em;vertical-align: middle" alt="Logo"/> -->
-            <span class="longbench" style="vertical-align: middle">LongBench v2</span>
+            <span class="longbench" style="vertical-align: middle">DeepPrune</span>
             </h1>
           <h2 class="subtitle is-3 publication-subtitle", style="margin-bottom: 20px;">
-            Benchmarking Deeper Understanding and Reasoning on Realistic Long-context Multitasks
+            Parallel Scaling without Inter-trace Redundancy
           </h2>
           
           <div class="is-size-5 publication-authors", style="width: 80%; margin: 20px auto;", >
-            <span class="author-block", style="font-size:24px"><a href="https://github.com/THUDM/LongBench">LongBench Team</a></span>
+            <span class="author-block", style="font-size:24px"><a href="https://github.com/THU-KEG">THU-KEG Team</a></span>
 
         </div>
 
@@ -115,12 +115,12 @@
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
                   </span>
-                  <span>arXiv</span>
+                  <span>ArXiv</span>
                 </a>
               </span>
               <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://github.com/THUDM/LongBench"
+                <a href="https://github.com/THU-KEG/DeepPrune"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -130,13 +130,24 @@
               </span>
               <!-- Dataset Link. -->
               <span class="link-block">
-                <a href="https://huggingface.co/datasets/THUDM/LongBench-v2"
+                <a href="https://huggingface.co/datasets/THU-KEG/DeepPrune"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <!-- <i class="far fa-images"></i> -->
                       <p style="font-size:18px">📊</p>
                   </span>
                   <span>Dataset</span>
+                </a>
+              </span> 
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/THU-KEG/DeepPrune-Judge-4B"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <!-- <i class="far fa-images"></i> -->
+                      <p style="font-size:18px">🤖</p>
+                  </span>
+                  <span>Model</span>
                 </a>
               </span> 
               <!-- Leaderboard Link. -->
@@ -160,7 +171,7 @@
 </section>
 
 <div style="text-align:center;">
-  <img src="static/images/leaderboard.png" alt="LongBench v2 frontier" style="max-width:50%;">
+  <img src="static/images/motivation.png" alt="LongBench v2 frontier" style="max-width:50%;">
 </div>
 
 <section class="section">
@@ -170,17 +181,11 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Introduction</h2>
         <div class="content has-text-justified">
-          LongBench v2 is designed to assess the ability of LLMs to handle long-context problems requiring <strong>deep understanding and reasoning</strong> across real-world multitasks. 
-          LongBench v2 has the following features: 
-          (1) <strong>Length</strong>: Context length ranging from 8k to 2M words, with the majority under 128k.
-          (2) <strong>Difficulty</strong>: Challenging enough that even human experts, using search tools within the document, cannot answer correctly in a short time.
-          (3) <strong>Coverage</strong>: Cover various realistic scenarios.
-          (4) <strong>Reliability</strong>: All in a multiple-choice question format for reliable evaluation.
-          To elaborate, LongBench v2 consists of 503 challenging multiple-choice questions, with contexts ranging from 8k to 2M words, across six major task categories: single-document QA, multi-document QA, long in-context learning, long-dialogue history understanding, code repo understanding, and long structured data understanding.
-          To ensure the breadth and the practicality, we collect data from nearly 100 highly educated individuals with diverse professional backgrounds. We employ both automated and manual review processes to maintain high quality and difficulty, resulting in human experts achieving only 53.7% accuracy under a 15-minute time constraint.
-          Our evaluation reveals that the best-performing model, when directly answers the questions, achieves only 50.1% accuracy. In contrast, the o1-preview model, which includes longer reasoning, achieves 57.7%, surpassing the human baseline by 4%.
+
+Parallel scaling has emerged as a powerful paradigm to enhance reasoning capabilities in large language models (LLMs) by generating multiple Chain-of-Thought (CoT) traces simultaneously. However, this approach introduces significant computational inefficiency due to <strong>inter-trace redundancy</strong>---our analysis reveals that over 80\% of parallel reasoning traces yield identical final answers, representing substantial wasted computation. To address this critical efficiency bottleneck, we propose <strong>DeepPrune</strong>, a novel framework that enables efficient parallel scaling through dynamic pruning. Our method features a specialized judge model trained with focal loss and oversampling techniques to accurately predict answer equivalence from partial reasoning traces which realizes 0.87 AUROC on equivalence prediction, combined with an online greedy clustering algorithm that dynamically prunes redundant paths while preserving answer diversity. Comprehensive evaluations across three challenging benchmarks (AIME 2024, AIME 2025, and GPQA) and multiple reasoning models demonstrate that DeepPrune achieves remarkable token reduction by over 80\% compared to conventional consensus sampling on most cases, while maintaining competitive accuracy within 3 percentage points. Our work establishes a new standard for efficient parallel reasoning, making high-performance reasoning more efficient.
+
           <br></br>
-          🔍 <strong>With LongBench v2, we are eager to find out how scaling inference-time compute will affect deep understanding and reasoning in long-context scenarios.</strong>
+          🔍 <strong>With DeepPrune, we are eager to find out how to achieve high performance with low token cost in inference-time scaling scenarios.</strong>
         </div>
       </div>
     </div>
@@ -201,6 +206,70 @@
     });
   }
 </script>
+
+<!-- DATASET SECTION -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+  <h1 class="title is-1 mathvista_other">
+    <span class="mathvista_other" style="vertical-align: middle">Method</span>
+  </h1>
+  </div>
+</section>
+            
+<section class="section">
+  <div class="container">
+
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-centered">
+          <h2 class="title is-3" style="margin-top: 30px;">Motivation</h2>
+          
+          <img src="static/images/motivation.png" alt="grade-lv" width="70%"/>
+
+        <p style="text-align: center; margin-left: auto; margin-right: auto; width: 80%;"> 
+          <strong>Data collection pipeline of LongBench v2</strong>. The annotator first uploads the document(s) and proposes a multiple-choice question based on the content. After that, automated and manual reviews will be conducted to ensure the data meets our requirements. Only data that passes these reviews is eligible for annotation rewards, meaning the annotator must revise the data until it passes all review stages.
+        </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-centered">
+          <h2 class="title is-3" style="margin-top: 30px;">Preliminary Experiment</h2>
+          
+          <img src="static/images/preliminary.png" alt="grade-lv" width="60%"/>
+
+        <p style="text-align: center; margin-left: auto; margin-right: auto; width: 60%;"> 
+            (Left) <strong>Length distribution of each task category</strong>; <br>(Right) <strong>Human expert solving time distribution</strong>.</br>
+        </p>
+
+        <!-- <img src="static/images/table.png" alt="grade-lv" width="60%"/>
+        <p style="text-align: center; margin-left: auto; margin-right: auto; width: 70%;"> 
+          <strong>Tasks and data statistics in LongBench v2</strong>. 'Length' is the <strong>median</strong> of the number of words. 'Expert Acc' and 'Expert Time' refer to the average accuracy and the <strong>median</strong> time spent on answering the question by human experts.
+      </p> -->
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-centered">
+          <h2 class="title is-3" style="margin-top: 30px;">Method Framework</h2>
+          
+          <img src="static/images/pipeline.png" alt="grade-lv" width="70%"/>
+
+        <p style="text-align: center; margin-left: auto; margin-right: auto; width: 80%;"> 
+          <strong>Data collection pipeline of LongBench v2</strong>. The annotator first uploads the document(s) and proposes a multiple-choice question based on the content. After that, automated and manual reviews will be conducted to ensure the data meets our requirements. Only data that passes these reviews is eligible for annotation rewards, meaning the annotator must revise the data until it passes all review stages.
+        </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <section class="section">
   <div class="container">
